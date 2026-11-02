@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover courses, build useful skills and grow with Preation Eduversity.">
+  <meta name="theme-color" content="#ffffff">
+
+  <title>Preation Eduversity</title>
+
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <header class="navbar">
+    <a href="#home" class="brand" aria-label="Preation Eduversity Home">
+      <span class="brand-mark">P</span>
+      <img src="favicon.ico" class="brand-logo" alt="Logo" onerror="this.remove()">
+
+      <span class="brand-name">
+        <strong>PREATION</strong>
+        <small>EDUVERSITY</small>
+      </span>
+    </a>
+
+    <nav aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#courses">Courses</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <button type="button" class="nav-register" onclick="openAuth('register')">
+      Register ↗
+    </button>
+  </header>
+
+
+  <main>
+
+    <!-- WELCOME -->
+    <section class="hero" id="home" aria-labelledby="heroTitle">
+
+      <div class="hero-content">
+        <span class="eyebrow">LEARN · GROW · MOVE FORWARD</span>
+
+        <h1 id="heroTitle">
+          Welcome to<br>
+          <span class="orange-text" id="typedPreation"></span><span class="blue-text" id="typedEduversity"></span><span class="cursor">|</span>
+        </h1>
+
+        <p>
+          Find the right course, build useful skills and take
+          the next step in your learning journey.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#courses" class="primary-btn">Explore Courses ↗</a>
+          <button type="button" class="secondary-btn" onclick="openAuth('register')">
+            Register
+          </button>
+        </div>
+
+        <div class="hero-note">
+          <span></span>
+          <div>
+            <strong>Where knowledge comes first.</strong>
+            <small class="sanskrit">सा विद्या या विमुक्तये</small>
+            <small class="translation">Knowledge is that which liberates.</small>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- WELCOME CARD -->
+      <div class="hero-visual">
+        <div class="visual-circle"></div>
+
+        <div class="learning-card">
+          <span class="card-top">YOUR NEXT CHAPTER</span>
+          <div class="card-star">✦</div>
+          <h2>Learn something<br>that moves you.</h2>
+          <p>Knowledge creates possibilities.</p>
+
+          <div class="card-bottom">
+            <span>PREATION EDUVERSITY</span>
+            <span>01 / 03</span>
+          </div>
+        </div>
+
+        <div class="floating-label label-one">✦ Keep learning</div>
+        <div class="floating-label label-two">A brighter way forward</div>
+      </div>
+
+    </section>
+
+
+    <!-- COURSE CATALOGUE -->
+    <section class="courses-section" id="courses" aria-labelledby="coursesTitle">
+
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">EXPLORE YOUR OPTIONS</span>
+          <h2 id="coursesTitle">
+            Discover your next <span class="orange-text">course.</span>
+          </h2>
+          <p>Find a course that matches your interests and ambitions.</p>
+        </div>
+
+        <div class="slider-controls">
+          <button type="button" id="previousCourse" aria-label="Previous courses">←</button>
+          <button type="button" id="nextCourse" aria-label="Next courses">→</button>
+        </div>
+      </div>
+
+      <!-- Courses loaded dynamically from FastAPI -->
+      <div
+        class="course-slider"
+        id="courseSlider"
+        role="region"
+        aria-label="Available courses"
+        aria-live="polite"
+      ></div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+    <section class="about-section" id="about" aria-labelledby="aboutTitle">
+      <span class="eyebrow">THE BEGINNING OF SOMETHING GREAT</span>
+
+      <h2 id="aboutTitle">
+        Learn. Discover. <span class="orange-text">Become.</span>
+      </h2>
+
+      <p>
+        Preation Eduversity brings your learning journey into one place.
+        Discover courses and take the next step towards your future.
+      </p>
+
+      <button type="button" class="primary-btn" onclick="openAuth('register')">
+        Register ↗
+      </button>
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">
+      <strong><span class="orange-text">PREATION</span> EDUVERSITY</strong>
+      <small>For educational purposes only.</small>
+    </div>
+
+    <p>
+      Created by
+      <a href="https://github.com/preation" target="_blank" rel="noopener noreferrer">
+        Preation ↗
+      </a>
+    </p>
+  </footer>
+
+
+  <!-- REGISTRATION AND LOGIN MODAL -->
+  <div
+    class="modal-backdrop"
+    id="authModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTitle"
+    aria-describedby="modalDescription"
+    aria-hidden="true"
+  >
+    <div class="auth-modal">
+
+      <button type="button" class="modal-close" onclick="closeAuth()" aria-label="Close">
+        ×
+      </button>
+
+      <div class="modal-heading">
+        <span class="eyebrow">WELCOME TO PREATION</span>
+
+        <h2 id="modalTitle">
+          Welcome to your ultimate learning <span class="orange-text">Rath.</span>
+        </h2>
+
+        <p id="modalDescription">
+          Register as a student to explore and enrol in courses.
+        </p>
+      </div>
+
+
+      <!-- AUTHENTICATION OPTIONS -->
+      <div class="auth-tabs" role="tablist" aria-label="Account access">
+
+        <button
+          type="button"
+          class="auth-tab active"
+          data-mode="register"
+          role="tab"
+          aria-selected="true"
+          aria-controls="registerFields"
+        >
+          Student Register
+        </button>
+
+        <button
+          type="button"
+          class="auth-tab"
+          data-mode="studentLogin"
+          role="tab"
+          aria-selected="false"
+          aria-controls="studentLoginFields"
+        >
+          Student Login
+        </button>
+
+        <button
+          type="button"
+          class="auth-tab"
+          data-mode="adminLogin"
+          role="tab"
+          aria-selected="false"
+          aria-controls="adminLoginFields"
+        >
+          Admin Login
+        </button>
+
+      </div>
+
+
+      <!-- AUTHENTICATION FORM -->
+      <form id="authForm" autocomplete="on">
+
+
+<!-- STUDENT REGISTRATION -->
+<div id="registerFields" data-auth-fields="register">
+
+  <label for="studentName">Full Name</label>
+  <input id="studentName" name="name" type="text"
+         placeholder="Enter your full name"
+         autocomplete="name" minlength="2" maxlength="100" required>
+
+  <label for="studentDepartment">Department</label>
+  <input id="studentDepartment" name="department" type="text"
+         placeholder="Enter your department"
+         minlength="2" maxlength="100" required>
+
+  <label for="studentEmail">Email Address</label>
+  <input id="studentEmail" name="email" type="email"
+         placeholder="you@example.com"
+         autocomplete="email" required>
+
+  <label for="studentPassword">Password</label>
+  <div class="password-field">
+    <input id="studentPassword" name="password" type="password"
+           placeholder="Minimum 8 characters"
+           autocomplete="new-password"
+           minlength="8" maxlength="128" required>
+
+    <button type="button" class="password-toggle"
+            onclick="togglePassword('studentPassword', this)"
+            aria-label="Show password" aria-pressed="false">
+      Show
+    </button>
+  </div>
+
+</div>
+
+
+<!-- STUDENT LOGIN -->
+<div id="studentLoginFields" data-auth-fields="studentLogin" hidden>
+
+  <label for="studentLoginEmail">Email Address</label>
+  <input id="studentLoginEmail" name="email" type="email"
+         placeholder="you@example.com"
+         autocomplete="username" disabled required>
+
+  <label for="studentLoginPassword">Password</label>
+  <div class="password-field">
+    <input id="studentLoginPassword" name="password" type="password"
+           placeholder="Enter your password"
+           autocomplete="current-password"
+           disabled required>
+
+    <button type="button" class="password-toggle"
+            onclick="togglePassword('studentLoginPassword', this)"
+            aria-label="Show password" aria-pressed="false">
+      Show
+    </button>
+  </div>
+
+</div>
+
+
+<!-- ADMIN LOGIN -->
+<div id="adminLoginFields" data-auth-fields="adminLogin" hidden>
+
+  <div class="admin-notice">
+    Restricted access · Authorised administrators only
+  </div>
+
+  <label for="adminEmail">Admin Email</label>
+  <input id="adminEmail" name="email" type="email"
+         placeholder="Enter admin email"
+         autocomplete="username" disabled required>
+
+  <label for="adminPassword">Password</label>
+  <div class="password-field">
+    <input id="adminPassword" name="password" type="password"
+           placeholder="Enter admin password"
+           autocomplete="current-password"
+           disabled required>
+
+    <button type="button" class="password-toggle"
+            onclick="togglePassword('adminPassword', this)"
+            aria-label="Show password" aria-pressed="false">
+      Show
+    </button>
+  </div>
+
+</div>
+
+
+
+        <button type="submit" class="form-submit" id="formSubmit">
+          Register ↗
+        </button>
+
+        <p
+          class="auth-message"
+          id="authMessage"
+          role="status"
+          aria-live="polite"
+          hidden
+        ></p>
+
+      </form>
+
+      <p class="education-note">
+        Preation Eduversity · For educational purposes
+      </p>
+
+    </div>
+  </div>
+
+
+  <!-- ASK ME HELPER -->
+  <div class="ask-me-area">
+
+    <div class="ask-message" id="askMessage" hidden>
+      <strong>Hey spectator! 👋</strong>
+      <p>I am yet to be implemented.</p>
+    </div>
+
+    <button
+      type="button"
+      class="ask-button"
+      id="askButton"
+      aria-label="Ask Me helper"
+      aria-controls="askMessage"
+      aria-expanded="false"
+    >
+      <span class="little-creature" aria-hidden="true">
+        <span class="creature-ear ear-left"></span>
+        <span class="creature-ear ear-right"></span>
+        <span class="creature-face">
+          <i></i><i></i><b></b>
+        </span>
+      </span>
+
+      <span>NAMASKAR!</span>
+    </button>
+
+  </div>
+
+</body>
+</html>
